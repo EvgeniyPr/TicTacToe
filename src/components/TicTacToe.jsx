@@ -4,10 +4,13 @@ import GameOver from "./GameOver";
 import GameState from "./GameState";
 import Reset from "./Reset";
 import clickSoundAsset from "../sounds/click.wav";
+import { useMachine } from "@xstate/react";
+import gameMachine from "../machines/gameMachine";
+
 const clickSound = new Audio(clickSoundAsset);
 clickSound.volume = 0.2;
 const PLAYER_X = "X";
-const PLAYER_O = "O";
+// const PLAYER_O = "O";
 const winningCombinations = [
   { combo: [0, 1, 2], strikeClass: "strike-row-1" },
   { combo: [3, 4, 5], strikeClass: "strike-row-2" },
@@ -18,68 +21,70 @@ const winningCombinations = [
   { combo: [0, 4, 8], strikeClass: "strike-diagonal-1" },
   { combo: [2, 4, 6], strikeClass: "strike-diagonal-2" },
 ];
+
 function TicTacToe() {
-  const [tiles, setTiles] = useState(Array(9).fill(null));
-  const [player, setPlayer] = useState(PLAYER_X);
+  const [state, send] = useMachine(gameMachine);
+
+  const { tiles, player, gameStatus } = state.context;
   const [strickeClass, setStrickeClass] = useState();
   const [gameState, setGameState] = useState(GameState.inProgress);
 
   useEffect(() => {
-    checkWinner(tiles, setStrickeClass, setGameState);
-  }, [tiles]);
+    if (gameStatus === "won") {
+      setGameState(
+        player === "X" ? GameState.playerXWin : GameState.playerOWin
+      );
+    } else if (gameStatus === "draw") {
+      setGameState(GameState.draw);
+    } else {
+      setGameState(GameState.inProgress);
+    }
+  }, [gameStatus, player]);
   //   useEffect(() => {
-  //     if (tiles.some((tile) => tile !== null)) {
-  //       clickSound.play();
-  //     }
+  //     checkWinner(tiles, setStrickeClass, setGameState);
   //   }, [tiles]);
 
-  function checkWinner(tiles, setStrickeClass, setGameState) {
-    for (const { combo, strikeClass } of winningCombinations) {
-      const tileValue1 = tiles[combo[0]];
-      const tileValue2 = tiles[combo[1]];
-      const tileValue3 = tiles[combo[2]];
-      if (
-        tileValue1 !== null &&
-        tileValue1 === tileValue2 &&
-        tileValue1 === tileValue3
-      ) {
-        setStrickeClass(strikeClass);
-        if (tileValue1 === PLAYER_X) {
-          setGameState(GameState.playerXWin);
-        } else {
-          setGameState(GameState.playerXWin);
-        }
-        return;
-      }
-    }
-    const allTilesAreFilledIn = tiles.every((tile) => tile !== null);
-    if (allTilesAreFilledIn) {
-      setGameState(GameState.draw);
-    }
-  }
+  //   function checkWinner(tiles, setStrickeClass, setGameState) {
+  //     for (const { combo, strikeClass } of winningCombinations) {
+  //       const tileValue1 = tiles[combo[0]];
+  //       const tileValue2 = tiles[combo[1]];
+  //       const tileValue3 = tiles[combo[2]];
+  //       if (
+  //         tileValue1 !== null &&
+  //         tileValue1 === tileValue2 &&
+  //         tileValue1 === tileValue3
+  //       ) {
+  //         setStrickeClass(strikeClass);
+  //         if (tileValue1 === PLAYER_X) {
+  //           setGameState(GameState.playerXWin);
+  //         } else {
+  //           setGameState(GameState.playerXWin);
+  //         }
+  //         return;
+  //       }
+  //     }
+  //     const allTilesAreFilledIn = tiles.every((tile) => tile !== null);
+  //     if (allTilesAreFilledIn) {
+  //       setGameState(GameState.draw);
+  //     }
+  //   }
 
   const handleTileClick = (index) => {
     if (gameState !== GameState.inProgress) {
       return;
     }
-    if (tiles[index] === null) {
-      const newTiles = [...tiles];
-      newTiles[index] = player;
-      setTiles(newTiles);
+    if (state.matches("playing") && tiles[index] === null) {
       const clickSoundClone = new Audio(clickSoundAsset);
       clickSoundClone.volume = 0.2;
       clickSoundClone.play();
-      if (player === PLAYER_X) {
-        setPlayer(PLAYER_O);
-      } else setPlayer(PLAYER_X);
+      send({ type: "CLICK_TILE", index });
     }
     return;
   };
+
   const handleReset = () => {
-    setGameState(GameState.inProgress);
-    setTiles(Array(9).fill(null));
-    setPlayer(PLAYER_X);
-    setStrickeClass(null);
+    send({ type: "RESET" });
+    console.log("reset");
   };
 
   return (

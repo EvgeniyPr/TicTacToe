@@ -1,5 +1,6 @@
 import GameState from "./GameState";
 function GameOver({ gameState }) {
+  console.log("gameState", gameState);
   switch (gameState) {
     case GameState.inProgress:
       return <></>;
