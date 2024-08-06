@@ -1,5 +1,7 @@
-function Stricke({ strickeClass }) {
-  return <div className={`strike ${strickeClass}`}></div>;
+import { StrikeContainer } from "../styles/StrikeStyles";
+
+function Strike({ strikeClass }) {
+  return <StrikeContainer className={strikeClass} />;
 }
 
-export default Stricke;
+export default Strike;

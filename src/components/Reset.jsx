@@ -1,14 +1,9 @@
-import GameState from "./GameState";
+import { ResetButton } from "../styles/ResetButton";
 
 function Reset({ gameState, onReset }) {
-  if (gameState === GameState.inProgress) {
-    return;
-  }
-  return (
-    <button className="reset-button" onClick={onReset}>
-      Reset button
-    </button>
-  );
+  return gameState !== "run" ? (
+    <ResetButton onClick={onReset}>Reset</ResetButton>
+  ) : null;
 }
 
 export default Reset;

@@ -1,12 +1,15 @@
+import { TileContainer } from "../styles/TileStyles";
+
 function Tile({ className, value, onClick, playerTern }) {
-  let hoverClass = null;
-  if (value === null) {
-    hoverClass = `${playerTern.toLowerCase()}-hover`;
-  }
   return (
-    <div className={`tile ${className} ${hoverClass}`} onClick={onClick}>
+    <TileContainer
+      className={className}
+      value={value}
+      data-playertern={playerTern}
+      onClick={onClick}
+    >
       {value}
-    </div>
+    </TileContainer>
   );
 }
 
