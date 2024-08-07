@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Tic-Tac-Toe Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+1. [General Info](#general-info)
+2. [Technologies](#technologies)
+3. [Components and Features](#components-and-features)
+4. [Setup](#setup)
 
-In the project directory, you can run:
+## General Info
 
-### `npm start`
+This project is a simple implementation of the classic Tic-Tac-Toe game. It allows two players to play in turns on a 3x3 grid.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The project is developed using the following technologies:
 
-### `npm test`
+- React
+- JavaScript (ES6+)
+- Jest
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Components and Features
 
-### `npm run build`
+### Key Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **State Management:** The game state is managed using a finite state machine (FSM) which helps handle various scenarios such as winning, drawing, and resetting the game.
+- **UI:** The user interface is built using React, ensuring a dynamic and responsive experience.
+- **Testing:** Jest is used for unit testing to ensure the reliability of the game logic and components.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### States and Actions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **playing:** The initial state of the game where players take turns.
+- **won:** The state when one player wins.
+- **draw:** The state when the game ends in a draw.
+- **reset:** The state to reset the game.
 
-### `npm run eject`
+### Events
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **CLICK_TILE:** Event triggered when a player clicks a tile.
+- **RESET:** Event triggered to reset the game.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Conditions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **checkWinCondition:** Checks if the current player has won.
+- **checkDrawCondition:** Checks if the game is a draw.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Actions
 
-## Learn More
+- **resetGame:** Resets the game to the initial state.
+- **clickTile:** Handles the tile click event.
+- **togglePlayer:** Switches the turn to the other player.
+- **setWinner:** Sets the winner of the game.
+- **setStrikeClass:** Sets the CSS class for the strike line.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Flowchart
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The following flowchart illustrates the state transitions and actions taken in the game:
 
-### Code Splitting
+![Tic-Tac-Toe Flowchart](src/images/ticTacToe.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Context
 
-### Analyzing the Bundle Size
+- **player:** The current player ('X' or 'O').
+- **winner:** The winner of the game.
+- **gameStatus:** The current status of the game (e.g., 'playing', 'won', 'draw').
+- **strikeClass:** CSS class for the strike line when a player wins.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Setup
 
-### Making a Progressive Web App
+### Installation Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Clone the repository:
+   git clone <repository-url>
+2. Navigate to the project directory:
+   cd tic-tac-toe
+3. Install the dependencies:
+   npm install
 
-### Advanced Configuration
+### Running the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1.  To start the project, run:
+    npm start
+    This will launch the game in your default web browser.
 
-### Deployment
+### Running Tests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1.  To start the project, run:
+    npm test
