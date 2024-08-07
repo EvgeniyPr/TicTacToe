@@ -70,19 +70,19 @@ The following flowchart illustrates the state transitions and actions taken in t
 ### Installation Instructions
 
 1. Clone the repository:
-   git clone <repository-url>
+   `git clone <repository-url>`
 2. Navigate to the project directory:
-   cd tic-tac-toe
+   `cd tic-tac-toe`
 3. Install the dependencies:
-   npm install
+   `npm install`
 
 ### Running the Project
 
 1.  To start the project, run:
-    npm start
+    `npm start`
     This will launch the game in your default web browser.
 
 ### Running Tests.
 
 1.  To start the project, run:
-    npm test
+    `npm test`
