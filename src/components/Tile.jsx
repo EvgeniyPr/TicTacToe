@@ -7,6 +7,7 @@ function Tile({ className, value, onClick, playerTern }) {
       value={value}
       data-playertern={playerTern}
       onClick={onClick}
+      role="button"
     >
       {value}
     </TileContainer>

@@ -25,9 +25,11 @@ function TicTacToe() {
     }
     return;
   };
+
   const handleReset = () => {
     send({ type: "RESET" });
   };
+
   return (
     <>
       <GlobalStyles />
