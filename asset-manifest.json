@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/TicTacToe/static/js/main.ed5360c2.js",
+    "static/media/click.wav": "/TicTacToe/static/media/click.0ff4ea852b22ca6a0714.wav",
+    "index.html": "/TicTacToe/index.html",
+    "main.ed5360c2.js.map": "/TicTacToe/static/js/main.ed5360c2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ed5360c2.js"
+  ]
+}
